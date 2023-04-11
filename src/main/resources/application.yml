@@ -1,0 +1,44 @@
+server:
+    port: 8082
+spring:
+    application:
+        name: admin
+    session:
+        timeout: 86400 # 设置session失效时间
+        store-type: redis
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        name: defaultDataSource
+        url: jdbc:mysql://localhost:3306/tgadmin?serverTimezone=UTC
+        username: 用户名
+        password: 密码
+    redis:
+        host: 127.0.0.1 # 改为自己的服务器ip
+        port: 6379
+        password:
+        database: 0
+        jedis:
+            pool:
+                # 连接池中最大空闲连接
+                max-idle: 8
+                # 连接池中最大阻塞等待时间（如果为负值则说明无限制）
+                max-wait: -1
+                # 连接池中最大的空闲连接数
+                max-active: 8
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+    mvc:
+        path match:
+            matching-strategy: ant_path_matcher
+mybatis:
+    mapper-locations: classpath:mapper/*xml
+    type-aliases-package: com.tg.admin.mybatis.entity
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+mybatis-plus:
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+files:
+    ip: localhost
+    upload:
+#        path: F:/项目/SpringBoot+vue/admin/files/

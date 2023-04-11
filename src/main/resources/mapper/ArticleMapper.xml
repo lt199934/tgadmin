@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tg.admin.mapper.ArticleMapper">
+    <resultMap id="articleAto" type="com.tg.admin.dto.ArticleDto">
+
+    </resultMap>
+    <select id="findPage" resultMap="articleAto">
+        select
+        a.id,title,a.content,a.author,a.create_time,c.id,c.name
+        from article a, article_cateory b, cateory c
+        <where>
+            <if test="name != null and name != ''">
+                name like concat('%' ,#{name}, '%')
+            </if>
+            <if test="email != null and email != ''">
+                and email like concat('%', #{email}, '%')
+            </if>
+            <if test="address != null and address != ''">
+                and address like concat('%', #{address},'%')
+            </if>
+        </where>
+        limit #{pageNum},#{pageSize}
+    </select>
+</mapper>

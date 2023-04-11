@@ -1,0 +1,12 @@
+com\tg\admin\entity\UserEntity.class
+com\tg\admin\mapper\UserMapper.class
+com\tg\admin\controller\UserController.class
+com\tg\admin\config\CorsConfig.class
+com\tg\admin\service\impl\UserServiceImpl.class
+com\tg\admin\mapper\MybatisPlusMapper.class
+com\tg\admin\AdminApplication.class
+com\tg\admin\service\impl\MybatisPlusService.class
+com\tg\admin\entity\User.class
+com\tg\admin\config\SwaggerConfig.class
+com\tg\admin\config\MybatisPlusConfig.class
+com\tg\admin\service\UserService.class

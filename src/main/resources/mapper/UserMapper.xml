@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tg.admin.mapper.UserMapper">
+    <resultMap id="user" type="com.tg.admin.entity.User">
+        <id column="id"  property="id"></id>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="nickname" property="nickname"></result>
+        <result column="avatar_url" property="avatarUrl"></result>
+        <result column="sex" property="sex"></result>
+        <result column="age" property="age"></result>
+        <result column="email" property="email"></result>
+        <result column="phone" property="phone"></result>
+        <result column="address" property="address"></result>
+        <result column="status" property="status"></result>
+        <result column="create_time" property="createTime"></result>
+    </resultMap>
+    <update id="updateUser" parameterType="com.tg.admin.entity.User">
+        update sys_user
+        <set>
+            <if test="username != null">
+                username = #{username
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="address != null">
+                address = #{address},
+            </if>
+        </set>
+        where
+            id = #{id}
+    </update>
+
+    <select id="findPage" resultMap="user">
+        select
+            id,username,password,nickname,avatar_url,sex,age,email,phone,address,status,create_time
+        from sys_user
+        <where>
+            <if test="username != null and username != ''">
+                username like concat('%' ,#{username}, '%')
+            </if>
+            <if test="email != null and email != ''">
+                and email like concat('%', #{email}, '%')
+            </if>
+            <if test="address != null and address != ''">
+                and address like concat('%', #{address},'%')
+            </if>
+        </where>
+        limit #{pageNum},#{pageSize}
+    </select>
+
+    <select id="count" resultType="integer">
+        select count(1) from sys_user
+        <where>
+            <if test="username != null and username != ''">
+                username like concat('%' ,#{username}, '%')
+            </if>
+            <if test="email != null and email != ''">
+                and email like concat('%', #{email}, '%')
+            </if>
+            <if test="address != null and address != ''">
+                and address like concat('%', #{address},'%')
+            </if>
+        </where>
+    </select>
+</mapper>
